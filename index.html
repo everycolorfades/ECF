@@ -43,9 +43,11 @@
     }
 
     .logo {
-      width: 100%; max-width: 360px; height: auto; margin: 0 auto; display: block;
-      /* If you embed the logo as CSS, uncomment the block below and remove the <img> tag */
-      /* background-image: var(--logo-image); background-size: contain; background-repeat: no-repeat; background-position: center; aspect-ratio: 6/2; */
+      /* intrinsic size from attributes: 1498x169; scale responsively */
+      width: min(100%, 560px);
+      height: auto;
+      display: block;
+      margin: 0 auto;
     }
 
     .links { display: grid; gap: 10px }
@@ -60,7 +62,7 @@
       border: 1px solid rgba(255,255,255,0.10);
       background: rgba(255,255,255,0.03);
     }
-    .hero-img { display: block; width: 100%; height: auto; object-fit: cover }
+    .hero-img { display: block; width: 100%; height: auto; object-fit: cover; aspect-ratio: 4 / 5 }
 
     .fine { opacity: 0.7; font-size: 14px; text-align: center; margin-top: 22px }
   </style>
@@ -72,7 +74,7 @@
       <!-- LEFT COLUMN: LOGO + LINKS -->
       <aside class="left" aria-label="Site navigation">
         <!-- Option A: Use an <img> and commit logo.png next to index.html -->
-        <img class="logo" src="logo.png" alt="every color fades logo" />
+        <img class="logo" src="logo.png" width="1498" height="169" alt="every color fades logo" />
         <!-- Option B (single-file): Delete the <img> above, uncomment the CSS in .logo, and replace this placeholder with nothing. -->
 
         <nav class="links">
