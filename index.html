@@ -41,20 +41,10 @@
     }
 
     /* Image layer */
-    .left::before {
-      content: ""; position: absolute; inset: 0;
-      background: var(--left-image, url('left.jpg')) center/cover no-repeat;
-      filter: saturate(105%) contrast(105%);
-      z-index: 0;
-    }
+    .left::before {$1z-index: -1;$2}
 
     /* Dark overlay for readability */
-    .left::after {
-      content: ""; position: absolute; inset: 0;
-      background: linear-gradient(180deg, rgba(10,10,10,0.82), rgba(10,10,10,0.88));
-      backdrop-filter: blur(2px);
-      z-index: 1;
-    }
+    .left::after {$1z-index: -1;$2}
 
     /* Ensure actual content sits above the overlays */
     .left > * { position: relative; z-index: 2; }
