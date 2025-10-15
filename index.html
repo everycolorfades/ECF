@@ -40,10 +40,20 @@
     }
 
     /* Image layer */
-    .left::before {$1z-index: 0;$2}
+    .left::before {
+      content: ""; position: absolute; inset: 1px; /* stay inside the border line */
+      background: var(--left-image, url('left.jpg')) center/cover no-repeat;
+      filter: saturate(105%) contrast(105%);
+      z-index: 0;
+    }
 
     /* Dark overlay for readability */
-    .left::after {$1z-index: 0;$2}
+    .left::after {
+      content: ""; position: absolute; inset: 1px; /* match before so border remains visible */
+      background: linear-gradient(180deg, rgba(10,10,10,0.82), rgba(10,10,10,0.88));
+      backdrop-filter: blur(2px);
+      z-index: 0;
+    }
 
     /* Ensure actual content sits above the overlays */
     .left > * {$1 z-index: 1; }
@@ -85,7 +95,9 @@
     .fine { opacity: 0.7; font-size: 14px; text-align: center; margin-top: 22px }
   .blurb { opacity: 0.9; margin: 4px 2px 12px; font-size: 15.5px; line-height: 1.5 }
   @media (max-width: 860px) {
-    .left::before { display: none }
+    /* keep the image on mobile, just darken overlay a bit for readability */
+    .left::after { background: linear-gradient(180deg, rgba(10,10,10,0.88), rgba(10,10,10,0.92)); backdrop-filter: blur(2px) }
+  }
     .left::after { background: rgba(10,10,10,0.85); backdrop-filter: none }
   }
   </style>
