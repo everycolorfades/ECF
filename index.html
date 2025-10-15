@@ -17,6 +17,8 @@
       /* --bg-image: url('data:image/jpeg;base64,PASTE_BACKGROUND_BASE64_HERE'); */
       /* --logo-image: url('data:image/png;base64,PASTE_LOGO_BASE64_HERE'); */
       /* --promo-image: url('data:image/jpeg;base64,PASTE_PROMO_BASE64_HERE'); */
+      /* Background image for the LEFT column */
+      --left-image: url('left.jpg');
     }
 
     .wrap { min-height: 100%; padding: 32px 16px 48px; display: grid; place-items: center }
@@ -25,22 +27,40 @@
     .grid {
       width: 100%; max-width: 1100px;
       display: grid; gap: 28px;
-      grid-template-columns: 1fr;
-      align-items: stretch; /* equal heights */
+      grid-template-columns: 1fr; align-items: start;
     }
     @media (min-width: 860px) {
       .grid { grid-template-columns: 420px minmax(0, 1fr) }
     }
 
-    /* LEFT: logo + links (flex column so footer sits at bottom) */
+    /* LEFT: logo + links */
     .left {
+      position: relative;
       display: flex; flex-direction: column; gap: 18px;
-      background: rgba(255,255,255,0.03);
       border: 1px solid rgba(255,255,255,0.10);
       border-radius: 16px;
       padding: 18px;
-      backdrop-filter: blur(6px);
+      overflow: hidden;
     }
+
+    /* Image layer */
+    .left::before {
+      content: ""; position: absolute; inset: 0;
+      background: var(--left-image, url('left.jpg')) center/cover no-repeat;
+      filter: saturate(105%) contrast(105%);
+      z-index: 0;
+    }
+
+    /* Dark overlay for readability */
+    .left::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(10,10,10,0.82), rgba(10,10,10,0.88));
+      backdrop-filter: blur(2px);
+      z-index: 1;
+    }
+
+    /* Ensure actual content sits above the overlays */
+    .left > * { position: relative; z-index: 2; }
 
     .logo {
       /* intrinsic size from attributes: 1498x169; scale responsively */
@@ -50,11 +70,20 @@
       margin: 0 auto;
     }
 
-    .blurb { opacity: 0.9; margin: 4px 2px 12px; font-size: 15.5px; line-height: 1.5 }
-
     .links { display: grid; gap: 10px }
-    .link { display: flex; align-items: center; justify-content: space-between; text-decoration: none; color: inherit; padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.02); transition: transform .12s ease, background .12s ease, border-color .12s ease }
-    .link:hover { transform: translateY(-1px); border-color: rgba(255,255,255,0.22); background: rgba(255,255,255,0.06) }
+    .link {
+      display: flex; align-items: center; justify-content: space-between;
+      text-decoration: none; color: inherit;
+      padding: 12px 14px; border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(0,0,0,0.35);
+      transition: transform .12s ease, background .12s ease, border-color .12s ease
+    }
+    .link:hover {
+      transform: translateY(-1px);
+      border-color: rgba(255,255,255,0.30);
+      background: rgba(0,0,0,0.48)
+    }
     .link span { font-weight: 600; letter-spacing: 0.2px }
 
     /* RIGHT: promo image */
@@ -66,7 +95,12 @@
     }
     .hero-img { display: block; width: 100%; height: auto; object-fit: cover; aspect-ratio: 4 / 5 }
 
-    .fine { opacity: 0.7; font-size: 14px; text-align: center; margin-top: auto } /* push footer to bottom */
+    .fine { opacity: 0.7; font-size: 14px; text-align: center; margin-top: 22px }
+  .blurb { opacity: 0.9; margin: 4px 2px 12px; font-size: 15.5px; line-height: 1.5 }
+  @media (max-width: 860px) {
+    .left::before { display: none }
+    .left::after { background: rgba(10,10,10,0.85); backdrop-filter: none }
+  }
   </style>
 </head>
 <body>
@@ -75,29 +109,32 @@
     <section class="grid">
       <!-- LEFT COLUMN: LOGO + LINKS -->
       <aside class="left" aria-label="Site navigation">
+        <!-- Option A: Use an <img> and commit logo.png next to index.html -->
         <img class="logo" src="logo.png" width="1498" height="169" alt="every color fades logo" />
+        <!-- Option B (single-file): Delete the <img> above, uncomment the CSS in .logo, and replace this placeholder with nothing. -->
 
         <p class="blurb">every color fades is a one man project from Michigan. New 5 song EP <em>Archive</em> out December 1.</p>
 
-        <nav class="links" aria-label="primary">
-          <!-- Primary -->
-          <a class="link" href="https://www.youtube.com/@EveryColorFades?sub_confirmation=1" target="_blank" rel="noopener"><span>YouTube</span></a>
-          <a class="link" href="https://everycolorfades.bandcamp.com/" target="_blank" rel="noopener"><span>Bandcamp</span></a>
-
-          <!-- Streaming -->
-          <a class="link" href="https://open.spotify.com/artist/6BEvoWZF9ihJBJwMBM5MNG" target="_blank" rel="noopener"><span>Spotify</span></a>
-          <a class="link" href="https://music.apple.com/us/artist/every-color-fades/436371268" target="_blank" rel="noopener"><span>Apple Music</span></a>
-
-          <!-- Merch (Fourthwall) -->
-          <a class="link" href="https://everycolorfades-shop.fourthwall.com/" target="_blank" rel="noopener"><span>Merch (Fourthwall)</span></a>
+<nav class="links" aria-label="primary">
+          <!-- Replace href values with real URLs -->
+          <a class="link" href="https://open.spotify.com/artist/your-id" target="_blank" rel="noopener"><span>Spotify</span></a>
+          <a class="link" href="https://music.apple.com/artist/your-id" target="_blank" rel="noopener"><span>Apple Music</span></a>
+          <a class="link" href="https://www.youtube.com/@yourchannel" target="_blank" rel="noopener"><span>YouTube</span></a>
+          <a class="link" href="https://soundcloud.com/your-id" target="_blank" rel="noopener"><span>SoundCloud</span></a>
+          <a class="link" href="https://instagram.com/your-id" target="_blank" rel="noopener"><span>Instagram</span></a>
+          <a class="link" href="https://twitter.com/your-id" target="_blank" rel="noopener"><span>Twitter</span></a>
+          <a class="link" href="https://your-merch-store.example" target="_blank" rel="noopener"><span>Merch</span></a>
         </nav>
-
         <p class="fine">© <span id="y"></span> every color fades</p>
       </aside>
 
       <!-- RIGHT COLUMN: PROMO / GUITAR IMAGE -->
       <section class="hero" aria-label="Promo image">
+        <!-- Option A: Commit promo.jpg next to index.html and use the <img> below. -->
         <img class="hero-img" src="promo.jpg" alt="Matt playing guitar" />
+        <!-- Option B (single-file): Instead of <img>, use a div with background-image: var(--promo-image) and a fixed aspect ratio. Example:
+        <div style="aspect-ratio: 4/5; background-image: var(--promo-image); background-size: cover; background-position: center"></div>
+        -->
       </section>
     </section>
   </main>
@@ -105,5 +142,4 @@
   <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
 </body>
 </html>
-
 
