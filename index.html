@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>every color fades</title>
+  <meta name="description" content="Links to music, socials, and merch." />
+  <style>
+    /* --- Reset / base --- */
+    html, body { height: 100%; margin: 0 }
+    *, *::before, *::after { box-sizing: border-box }
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: #f7f7f7;
+      background: #0b0b0f;
+      line-height: 1.45;
+    }
+
+    /* --- Background image --- */
+    .bg {
+      position: fixed; inset: 0; z-index: -1; opacity: 0.55;
+      background-image: var(--bg-image, radial-gradient(1200px 800px at 70% 20%, #1b2440 0%, #0b0b0f 60%));
+      background-size: cover; background-repeat: no-repeat; background-position: center;
+      filter: saturate(110%) contrast(105%);
+    }
+
+    /* If you prefer a single embedded image, replace the gradient above by setting
+       the --bg-image variable in :root to url('data:image/...base64,...') */
+
+    :root {
+      /* Example of how to embed a base64 image as the background
+      --bg-image: url('data:image/jpeg;base64,REPLACE_WITH_YOUR_BASE64');
+      */
+    }
+
+    /* --- Layout --- */
+    .wrap {
+      min-height: 100%;
+      display: grid; place-items: center;
+      padding: 4rem 1.25rem;
+    }
+
+    .card {
+      width: 100%; max-width: 720px;
+      background: rgba(15, 16, 24, 0.72);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.45);
+      overflow: hidden;
+    }
+
+    .header {
+      padding: 2.25rem 2rem 1rem;
+      display: flex; align-items: center; gap: 1rem;
+    }
+
+    .avatar {
+      width: 64px; height: 64px; border-radius: 14px; flex: 0 0 auto;
+      background: rgba(255,255,255,0.08);
+      overflow: hidden; border: 1px solid rgba(255,255,255,0.08);
+      background-image: var(--avatar, linear-gradient(135deg, #3c4a7a, #131825));
+      background-size: cover; background-position: center;
+    }
+
+    h1 { font-size: 1.75rem; margin: 0; letter-spacing: 0.5px }
+    .tagline { opacity: 0.8; margin-top: 0.25rem; font-size: 0.98rem }
+
+    .links { display: grid; gap: 10px; padding: 1rem 1rem 1.5rem }
+
+    .link {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 16px; border-radius: 14px; text-decoration: none; color: inherit;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.02);
+      transition: transform 120ms ease, background 120ms ease, border-color 120ms ease;
+    }
+    .link:hover { transform: translateY(-2px); border-color: rgba(255,255,255,0.18); background: rgba(255,255,255,0.05) }
+
+    .link .label { font-weight: 600; letter-spacing: 0.2px }
+    .link .desc { opacity: 0.75; font-size: 0.92rem }
+
+    .footer { padding: 1rem 2rem 1.5rem; opacity: 0.7; font-size: 0.9rem; text-align: center }
+
+    /* Small screens */
+    @media (max-width: 420px) {
+      .header { padding: 1.5rem 1rem 0.5rem }
+      .links { padding: 0.75rem }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg"></div>
+  <main class="wrap">
+    <section class="card" role="region" aria-label="Links">
+      <header class="header">
+        <div class="avatar" aria-hidden="true"></div>
+        <div>
+          <h1>every color fades</h1>
+          <div class="tagline">listen, follow, pick up merch</div>
+        </div>
+      </header>
+
+      <div class="links">
+        <!-- Replace the href values with your real URLs -->
+        <a class="link" href="https://open.spotify.com/artist/your-id" target="_blank" rel="noopener">
+          <div class="label">Spotify</div>
+          <div class="desc">stream the EP</div>
+        </a>
+        <a class="link" href="https://music.apple.com/artist/your-id" target="_blank" rel="noopener">
+          <div class="label">Apple Music</div>
+          <div class="desc">add to library</div>
+        </a>
+        <a class="link" href="https://soundcloud.com/your-id" target="_blank" rel="noopener">
+          <div class="label">SoundCloud</div>
+          <div class="desc">private press links</div>
+        </a>
+        <a class="link" href="https://www.youtube.com/@yourchannel" target="_blank" rel="noopener">
+          <div class="label">YouTube</div>
+          <div class="desc">videos and visuals</div>
+        </a>
+        <a class="link" href="https://instagram.com/your-id" target="_blank" rel="noopener">
+          <div class="label">Instagram</div>
+          <div class="desc">updates</div>
+        </a>
+        <a class="link" href="https://twitter.com/your-id" target="_blank" rel="noopener">
+          <div class="label">Twitter</div>
+          <div class="desc">thoughts</div>
+        </a>
+        <a class="link" href="https://your-merch-store.example" target="_blank" rel="noopener">
+          <div class="label">Merch Store</div>
+          <div class="desc">tees and more</div>
+        </a>
+      </div>
+
+      <div class="footer">© <span id="y"></span> every color fades</div>
+    </section>
+  </main>
+
+  <script>
+    // auto year
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
